@@ -1,0 +1,292 @@
+/* font */
+/* Определение шрифта */
+@font-face {
+  font-family: 'Tupo Vyaz';
+  src: url('/fonts/tupo-vyaz_regular.ttf');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Применение шрифта ко всему сайту */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+button,
+input,
+label,
+select,
+option,
+textarea {
+  font-family: 'Tupo Vyaz', sans-serif;
+}
+
+header {
+  background-color: black;
+  color: silver;
+  width: 100%;
+  height: 55px;
+  /* задаем высоту в пикселях */
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-text {
+  display: flex;
+  align-items: center;
+  color: gold;
+  font-size: 24px;
+}
+
+.logo-text__text {
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.language-menu {
+  display: flex;
+  align-items: center;
+}
+
+.language-option {
+  text-decoration: none;
+  color: silver;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 20px;
+  position: relative;
+}
+
+.language-name {
+  display: inline-block;
+  position: relative;
+}
+
+.language-name--large {
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  font-size: 22px;
+}
+
+.language-name span {
+  position: absolute;
+  opacity: 0;
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Content Block */
+.content-block {
+  padding: 60px 0;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 50px;
+}
+
+.col {
+  padding: 0 15px;
+}
+
+.content-image {
+  width: 400px;
+  height: auto;
+}
+
+.content-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.content-info {
+  margin-left: 50px;
+}
+
+.content-title {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.content-description {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 100%;
+}
+
+/* CSS для PDF - viewer */
+.pdf-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+#pdf-container.fullscreen {
+  overflow: auto;
+}
+
+.pdf-container .pdf-overlay {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overscroll-behavior: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-snap-type: y mandatory;
+}
+
+#pdf-container::-webkit-scrollbar {
+  display: none;
+}
+
+#canvas-container.fullscreen {
+  width: 80%;
+  height: 60vh;
+  max-width: 80vw;
+  max-height: 60vh;
+  margin-top: 5%;
+  overflow: hidden;
+}
+
+.pdf-overlay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer {
+  background-color: rgb(38, 38, 38);
+  text-align: center;
+  padding: 20px;
+}
+
+#canvas.fullscreen {
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#pdf-button-open,
+#prev,
+#next,
+#close,
+#fullscreen {
+  background-color: transparent;
+  border: 2px solid #333;
+  color: snow;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+#pdf-button-open:hover,
+#prev:hover,
+#next:hover,
+#close:hover,
+#fullscreen:hover {
+  background-color: #9e0e0e;
+  color: snow;
+}
+
+#page_num,
+#page_count {
+  font-weight: bold;
+}
+
+#page_count {
+  margin-left: 5px;
+}
+
+#pdf-viewer.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(38, 38, 38);
+  z-index: 9999;
+}
+
+#pdf-viewer.fullscreen #canvas-container.fullscreen {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 0;
+  overflow: auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CSS для мобильных устройств */
+
+@media screen and (max-width: 600px) {
+  .pdf-container .pdf-overlay {
+    margin-top: 4vh;
+  }
+
+  #canvas-container.fullscreen {
+    margin-top: 7vh;
+    transform: scale(1.1);
+  }
+
+  #canvas.fullscreen {
+    margin-bottom: 4%;
+  }
+}
