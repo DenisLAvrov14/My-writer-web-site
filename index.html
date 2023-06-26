@@ -1,200 +1,302 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>My Author Website</title>
-    <link rel="stylesheet" href="CSS/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Author Website</title>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    var $j = jQuery.noConflict();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    jQuery(document).ready(function() {
+      var availableLanguages = ['ru', 'en', 'es'];
+      var defaultLanguage = 'en';
+      var languageCookieName = 'preferredLanguage';
+  
+      function getPreferredLanguage() {
+        var userLanguage = navigator.language || navigator.userLanguage;
+        var preferredLanguage = userLanguage.substr(0, 2);
+        if (availableLanguages.indexOf(preferredLanguage) !== -1) {
+          return preferredLanguage;
+        }
+        return defaultLanguage;
+      }
+  
+      function setLanguage(language) {
+        jQuery('html').attr('lang', language);
+        // Здесь можно добавить код для обновления переводов на странице,
+        // чтобы соответствовать выбранному языку.
+      }
+  
+      function savePreferredLanguage(language) {
+        document.cookie = languageCookieName + '=' + language + '; path=/';
+      }
+  
+      function getCookie(name) {
+        var matches = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      }
+  
+      var preferredLanguage = getPreferredLanguage();
+      setLanguage(preferredLanguage);
+      savePreferredLanguage(preferredLanguage);
+  
+      // Если язык не выбран ранее, используем значение по умолчанию.
+      var storedLanguage = getCookie(languageCookieName);
+      if (storedLanguage && availableLanguages.indexOf(storedLanguage) !== -1) {
+        setLanguage(storedLanguage);
+      }
+    });
+  </script>  
+</head>
+
+<body>
+  <header>
+    <div class="logo-text">
+      <span class="logo-text__text" lang="welcome_message"></span>
+    </div>
+    <div class="language-menu">
+      <a href="#" class="language-option" data-language="en">
+        <span class="language-name language-name--large">English</span>
+      </a>
+      <a href="#" class="language-option" data-language="ru">
+        <span class="language-name language-name--large">Русский</span>
+      </a>
+      <a href="#" class="language-option" data-language="es">
+        <span class="language-name language-name--large">Español</span>
+      </a>
+    </div>
     <script>
-      var $j = jQuery.noConflict();
+      jQuery(function () {
+        var words = ["свобода", "freedom", "თავისუფლება", "wolność", "ազատություն", "freiheit", "자유", "libertad", "自由", "स्वतंत्रता", "حرية", "libert", "自由", "liberdade", "özgürlük", "libertà", "воля", "will", "ნება", "wola", "կամավորում", "Wille", "의지", "voluntad", "意志", "इच्छा", "إرادة", "volonté", "意志", "vontade", "irade", "volontà", "irade", "правда", "truth", "ჭეშმარიტება", "істина", "prawda", "ճշմարիտություն", "Wahrheit", "진실", "verdad", "真相", "सच्चाई", "الحقيقة", "vérité", "真実", "verdade", "verità", "gerçek", "verità"]
+        var typed = new Typed(".logo-text__text", {
+          strings: words,
+          typeSpeed: 50,
+          backSpeed: 50,
+          loop: true,
+          showCursor: false
+        });
+      });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
-  </head>  
-  <body>
-    <header>
-        <div class="logo-text">
-          <span class="logo-text__text"></span>
-        </div>
-        <div class="language-menu">
-          <a href="#" class="language-option" data-language="en">
-            <span class="language-name language-name--large">English</span>
-          </a>
-          <a href="#" class="language-option" data-language="ru">
-            <span class="language-name language-name--large">Русский</span>
-          </a>
-          <a href="#" class="language-option" data-language="es">
-            <span class="language-name language-name--large">Español</span>
-          </a>
-          <a href="#" class="language-option" data-language="ka">
-            <span class="language-name">ქართული</span>
-          </a>
-          <a href="#" class="language-option" data-language="ja">
-            <span class="language-name">日本語</span>
-          </a>
-        </div>
-        <script>
-            jQuery(function() {
-              var words = ["свобода", "freedom", "თავისუფლება", "wolność", "ազատություն", "freiheit", "자유", "libertad", "自由", "स्वतंत्रता","حرية", "libert", "自由", "liberdade", "özgürlük", "libertà", "воля", "will", "ნება", "wola", "կամավորում", "Wille", "의지", "voluntad", "意志", "इच्छा", "إرادة", "volonté", "意志", "vontade", "irade", "volontà", "irade","правда" ,"truth", "ჭეშმარიტება", "істина", "prawda", "ճշմարիտություն", "Wahrheit", "진실", "verdad", "真相", "सच्चाई", "الحقيقة", "vérité", "真実", "verdade", "verità", "gerçek", "verità"]
-              var typed = new Typed(".logo-text__text", {
-                strings: words,
-                typeSpeed: 50,
-                backSpeed: 50,
-                loop: true,
-                showCursor: false
-              });
-            });
-          </script>
-      </header>  
-      <div class="typewriter-container" id="typewriter-container">
-        <div class="typewriter-wrapper">
-          <h1 class="typewriter-text" data-text="Здравствуйте! Меня зовут Денис и я писатель, На этом сайте вы можете ознакомиться с моими работами. Оригинальный язык моих текстов - русский, остальные языки представленные на сайте были переведены при помощи ИИ ChatGPT" data-speed="100">
-          </h1>
-        </div>
-      </div>            
-      <script>
-        jQuery(function() {
-          var title = jQuery('.typewriter-text');
-          var i = 0;
-          var txt = title.data('text');
-          var speed = 30; // Изменили скорость печати
-          var alternateChars = ['Δ', '❘', '✰', '4', 'Φ', 'ή', 'ß', '□', '2', '소', 'く', 'あ', '0', '☺'];
-          var lastChar = '.'; // получаем последний символ
-        
-          function typeWriter() {
-            if (i < txt.length) {
-              var char = txt.charAt(i);
-              if (char !== ' ') {
-                if (Math.random() > 0.1) {
-                  char = alternateChars[Math.floor(Math.random() * alternateChars.length)];
-                }
-              }
-              title.html(txt.substring(0, i) + char);
-              i++;
-              setTimeout(typeWriter, speed);
-            } else if (lastChar) { // добавляем последний символ, если он есть
-              title.html(txt + lastChar);
+  </header>
+  <div class="typewriter-container" id="typewriter-container">
+    <div class="typewriter-wrapper">
+      <h1 class="typewriter-text" data-translate="welcome_message"
+        data-text="Здравствуйте! Меня зовут Денис и я писатель, На этом сайте вы можете ознакомиться с моими работами. Оригинальный язык моих текстов - русский, остальные языки представленные на сайте были переведены при помощи ИИ ChatGPT"
+        data-speed="100">
+      </h1>
+    </div>
+  </div>
+  <script>
+    jQuery(function () {
+      var title = jQuery('.typewriter-text');
+      var i = 0;
+      var txt = title.data('text');
+      var speed = 30; // Изменили скорость печати
+      var alternateChars = ['Δ', '❘', '✰', '4', 'Φ', 'ή', 'ß', '□', '2', '소', 'く', 'あ', '0', '☺'];
+      var lastChar = '.'; // получаем последний символ
+
+      function typeWriter() {
+        if (i < txt.length) {
+          var char = txt.charAt(i);
+          if (char !== ' ') {
+            if (Math.random() > 0.1) {
+              char = alternateChars[Math.floor(Math.random() * alternateChars.length)];
             }
           }
-        
+          title.html(txt.substring(0, i) + char);
+          i++;
           setTimeout(typeWriter, speed);
-        });
-        </script>
-      </div>                    
-    <main>
-      <div class="cell-container">
-        <div class="cell">
-          <a href="content-page.html">
-            <img src="cover-image.jpg" alt="">
-            <h3>Название контента</h3>
-          </a>
-        </div>
-        <!-- Другие ячейки -->
-      </div>
-    </main>
-    <section class="support-section">
-      <div class="support-container">
-        <div class="donation-text" data-text="Моё творчество доступно бесплатно. Просьба при копировании указывать ссылку на автора"></div>
-        <div id="donation-block">Банковский счёт: <span class='account-number'>12345678901234567890</span><br>Криптокошелек: <span class='account-number'>0xAbCdEfGhIjKlMnOpQrStUvWxYz</span></div>
-        <div class="copy-notification">Номер счёта скопирован</div>
-      </div>
-    </section>    
-    
-    <script>
-      jQuery(document).ready(function() {
-  var donationText = jQuery(".donation-text");
-  var donationBlock = jQuery("#donation-block");
-  var copyMessage = jQuery(".copy-message");
-  var accountNumber = jQuery(".account-number");
-  var copyNotification = jQuery(".copy-notification");
-
-  donationBlock.hide();
-  copyNotification.css("opacity", "0");
-
-  donationText.on('input', function() {
-    donationBlock.show();
-  });
-
-  accountNumber.click(function() {
-    var text = jQuery(this).text();
-    var temp = jQuery("<input>");
-    jQuery("body").append(temp);
-    temp.val(text).select();
-    document.execCommand("copy");
-    temp.remove();
-
-    copyMessage.text("Copied!");
-    copyNotification.css("opacity", "1");
-    setTimeout(function() {
-      copyNotification.css("opacity", "0");
-    }, 1500);
-  });
-
-  var title = jQuery('.donation-text');
-  var i = 0;
-  var txt = title.data('text');
-  var speed = 30;
-  var alternateChars = ['Δ', '❘', '✰', '4', 'Φ', 'ή', 'ß', '□', '2', '소', 'く', 'あ', '0', '☺'];
-  var lastChar = '.';
-
-  // устанавливаем флаг, который указывает, что анимация не была запущена
-  var animationStarted = false;
-
-  // функция, которая запускает анимацию при достижении определенной точки скролла
-  function checkScroll() {
-    var scrollTop = jQuery(window).scrollTop();
-    var elemTop = title.offset().top;
-    if (!animationStarted && scrollTop + jQuery(window).height() > elemTop) {
-      setTimeout(typeWriter, speed);
-      animationStarted = true;
-    }
-  }
-
-  // проверяем скролл на загрузке страницы и каждый раз, когда пользователь прокручивает страницу
-  checkScroll();
-  jQuery(window).scroll(checkScroll);
-
-  function typeWriter() {
-    if (i < txt.length) {
-      var char = txt.charAt(i);
-      if (char !== ' ') {
-        if (Math.random() > 0.1) {
-          char = alternateChars[Math.floor(Math.random() * alternateChars.length)];
+        } else if (lastChar) { // добавляем последний символ, если он есть
+          title.html(txt + lastChar);
         }
       }
-      title.html(txt.substring(0, i) + char);
-      i++;
+
       setTimeout(typeWriter, speed);
-    } else if (lastChar) {
-      title.html(txt + lastChar);
+    });
+  </script>
+  </div>
+  <script>
+    // Загружаем и применяем переводы на страницу
+    function loadTranslations(lang) {
+      var xhr = new XMLHttpRequest();
+      var url = 'assets/' + lang + '.json';
+
+      xhr.open('GET', url, true);
+      xhr.send();
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            var translations = JSON.parse(xhr.responseText);
+            applyTranslations(translations);
+          } else {
+            console.error('Failed to load translations: ' + xhr.status);
+          }
+        }
+      };
     }
-    if (i === txt.length) {
-      donationBlock.fadeIn(800);
+
+    // Применяем переводы к текстовым элементам на странице
+    function applyTranslations(translations) {
+      var elements = document.querySelectorAll('[data-translate]');
+      elements.forEach(function (element) {
+        var translationKey = element.getAttribute('data-translate');
+        if (translations.hasOwnProperty(translationKey)) {
+          element.textContent = translations[translationKey];
+        }
+      });
     }
-  }
-});
-    </script>
-    
-    <section class="contact-section">
-      <div class="contact-container">
-        <h2>Вы можете связаться со мной и написать письмо</h2>
-        <form class="contact-form" action="mailto:denislavrov14@gmail.com" method="post" enctype="text/plain">
-          <div class="input-group">
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-    
-          <div class="input-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-    
-          <label for="message">Сообщение:</label>
-          <textarea id="message" name="message" required></textarea>
-    
-          <button type="submit">Отправить</button>
-        </form>
+
+    // Обработчик клика на языковую опцию
+    function languageOptionClick(event) {
+      event.preventDefault();
+
+      var languageOption = event.currentTarget;
+      var selectedLanguage = languageOption.getAttribute('data-language');
+
+      // Загрузка и применение переводов
+      loadTranslations(selectedLanguage);
+    }
+
+    // Находим все языковые опции и назначаем обработчик клика
+    var languageOptions = document.querySelectorAll('.language-option');
+    languageOptions.forEach(function (option) {
+      option.addEventListener('click', languageOptionClick);
+    });
+
+  </script>
+  <main>
+    <div class="cell-container">
+      <div class="cell">
+        <a href="content-page.html">
+          <img src="cover-image.jpg" alt="">
+          <h3 data-translate="content_title">Название контента</h3>
+        </a>
       </div>
-    </section>    
-    
-  </body>
+      <!-- Другие ячейки -->
+    </div>
+  </main>
+  <section class="support-section">
+    <div class="support-container">
+      <div class="donation-text" data-translate="donation_text"
+        data-text="Моё творчество доступно бесплатно. Просьба при копировании указывать ссылку на автора"></div>
+        <div id="donation-block" data-translate="donation_block">
+          <span data-translate="bank_account_title">Банковский счёт:</span> 
+          <span class='account-number' data-translate="bank_account_number1">12345678901234567890</span>
+          <br>
+          <span data-translate="crypto_wallet_title">Криптокошелек:</span> 
+          <span class='account-number' data-translate="bank_account_number2">0xAbCdEfGhIjKlMnOpQrStUvWxYz</span>
+        </div>        
+      <div class="copy-notification" data-translate="copy_notification">Номер счёта скопирован</div>
+    </div>
+  </section>
+
+  <script>
+    jQuery(document).ready(function () {
+      var copyNotification = jQuery(".copy-notification");
+      var accountNumber = jQuery(".account-number");
+
+      copyNotification.css("opacity", "0");
+
+      accountNumber.click(function () {
+        var text = jQuery(this).text();
+        var temp = jQuery("<input>");
+        jQuery("body").append(temp);
+        temp.val(text).select();
+        document.execCommand("copy");
+        temp.remove();
+
+        copyNotification.css("opacity", "1");
+        setTimeout(function () {
+          copyNotification.css("opacity", "0");
+        }, 1500);
+      });
+
+      function updateTranslations() {
+        var currentLanguage = jQuery('html').attr('lang');
+        var translationFile = 'assets/' + currentLanguage + '.json';
+
+        jQuery.getJSON(translationFile, function (translations) {
+          jQuery('[data-translate]').each(function () {
+            var translationKey = jQuery(this).data('translate');
+            if (translations.hasOwnProperty(translationKey)) {
+              jQuery(this).text(translations[translationKey]);
+            }
+          });
+        });
+      }
+
+      // Вызываем функцию обновления переводов при загрузке страницы
+      updateTranslations();
+    });
+
+    var donationBlock = jQuery("#donation-block");
+var title = jQuery('.donation-text');
+var i = 0;
+var txt = title.data('text');
+var speed = 30;
+var alternateChars = ['Δ', '❘', '✰', '4', 'Φ', 'ή', 'ß', '□', '2', '소', 'く', 'あ', '0', '☺'];
+var lastChar = '.';
+
+var animationStarted = false;
+
+function checkScroll() {
+  var scrollTop = jQuery(window).scrollTop();
+  var elemTop = title.offset().top;
+  if (!animationStarted && scrollTop + jQuery(window).height() > elemTop) {
+    setTimeout(typeWriter, speed);
+    animationStarted = true;
+  }
+}
+
+checkScroll();
+jQuery(window).scroll(checkScroll);
+
+function typeWriter() {
+  if (i < txt.length) {
+    var char = txt.charAt(i);
+    if (char !== ' ') {
+      if (Math.random() > 0.1) {
+        char = alternateChars[Math.floor(Math.random() * alternateChars.length)];
+      }
+    }
+    title.html(txt.substring(0, i) + char);
+    i++;
+    setTimeout(typeWriter, speed);
+  } else if (lastChar) {
+    title.html(txt + lastChar);
+  }
+  if (i === txt.length) {
+    donationBlock.fadeIn(800);
+  }
+}
+
+  </script>
+  <section class="contact-section">
+    <div class="contact-container">
+      <h2 data-translate="contact_title">Вы можете связаться со мной и написать письмо</h2>
+      <form class="contact-form" action="mailto:denislavrov14@gmail.com" method="post" enctype="text/plain">
+        <div class="input-group">
+          <label for="name" data-translate="name_label">Имя:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="input-group">
+          <label for="email" data-translate="email_label">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <label for="message" data-translate="message_label">Сообщение:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit" data-translate="submit_button">Отправить</button>
+      </form>
+    </div>
+  </section>
+</body>
+
 </html>
